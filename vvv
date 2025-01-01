@@ -24,7 +24,7 @@ local Window = Rayfield:CreateWindow({
    DisableBuildWarnings = false,
 
    ConfigurationSaving = {
-      Enabled = false,
+      Enabled = true,
       FolderName = "Skull Hub",
       FileName = "JuInfinite"
    },
@@ -668,6 +668,45 @@ local i2Button = misc:CreateButton({
         }
 
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Server"):WaitForChild("Data"):WaitForChild("InnateSpin"):InvokeServer(unpack(args))
+    end,
+})
+
+local Section = misc:CreateSection("Local Player")
+
+local jumpPower = 77
+local walkSpeed = 16
+
+local jpSlider = misc:CreateSlider({
+    Name = "Jump Power",
+    Range = {77, 400},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = jumpPower,
+    Flag = "lafmfsdja",
+    Callback = function(Value)
+        jumpPower = Value
+        local localPlayer = game.Players.LocalPlayer
+        local humanoid = localPlayer.Character and localPlayer.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.JumpPower = jumpPower
+        end
+    end,
+})
+
+local wsSlider = misc:CreateSlider({
+    Name = "Walk Speed",
+    Range = {16, 400},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = walkSpeed,
+    Flag = "lafmfsdja",
+    Callback = function(Value)
+        walkSpeed = Value
+        local localPlayer = game.Players.LocalPlayer
+        local humanoid = localPlayer.Character and localPlayer.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = walkSpeed
+        end
     end,
 })
 
